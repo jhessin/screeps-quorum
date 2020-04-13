@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+gulp --server=server1.screepspl.us
