@@ -93,12 +93,12 @@ class Spook extends MetaRole {
       return false;
     }
     // Already Signed
-    if (
-      creep.room.controller.sign &&
-      creep.room.controller.sign.username === USERNAME
-    ) {
-      return false;
-    }
+    // if (
+    //   creep.room.controller.sign &&
+    //   creep.room.controller.sign.username === USERNAME
+    // ) {
+    //   return false;
+    // }
     // Not ours (reserved)
     if (
       creep.room.controller.reservation &&
