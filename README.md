@@ -1,76 +1,57 @@
-# screeps-quorum
+# Screeps Typescript Starter
 
-Screeps Quorum is a completely automated project centered around the game [Screeps](https://screeps.com/).
+Screeps Typescript Starter is a starting point for a Screeps AI written in Typescript. It provides everything you need to start writing your AI whilst leaving `main.ts` as empty as possible.
 
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-[![License](https://img.shields.io/npm/l/screepsbot-quorum.svg)](https://npmjs.com/package/screepsbot-quorum)
-[![Version](https://img.shields.io/npm/v/screepsbot-quorum.svg)](https://npmjs.com/package/screepsbot-quorum)
-[![Downloads](https://img.shields.io/npm/dw/screepsbot-quorum.svg)](https://npmjs.com/package/screepsbot-quorum)
-[![CircleCI](https://circleci.com/gh/ScreepsQuorum/screeps-quorum/tree/master.svg?style=shield)](https://circleci.com/gh/ScreepsQuorum/screeps-quorum/tree/master)
+## Basic Usage
 
-![npm](https://nodei.co/npm/screepsbot-quorum.png "NPM")
+You will need:
 
-While there are other Screeps code bases which focus on automation, this is the first codebase which has automated its own management and deployment. The Quorum project does not have a single specific user behind it, but is completely independent.
-
-All Pull Requests are done by volunteers, and the entire project is [open source](https://github.com/ScreepsQuorum/screeps-quorum/blob/master/LICENSE).
+ - [Node.JS](https://nodejs.org/en/download) (>= 8.0.0)
+ - A Package Manager ([Yarn](https://yarnpkg.com/en/docs/getting-started) or [npm](https://docs.npmjs.com/getting-started/installing-node))
+ - Rollup CLI (Optional, install via `npm install -g rollup`) 
+ - Build tools (`apt install build-essential` for Ubuntu, [Visual Studio](https://www.visualstudio.com/vs/) for Windows, etc) 
 
 
-## How does it work?
+Download the latest source [here](https://github.com/screepers/screeps-typescript-starter/archive/master.zip) and extract it to a folder.
 
-* Anyone can make a pull request. Developers can then vote on the pull requests using reactions (:+1:, :-1:, or :confused:). Pull requests which meet the [consensus rules](https://github.com/ScreepsQuorum/screeps-quorum/blob/master/.gitconsensus.yaml) and pass all tests will be merged using [Gitconsensus](https://www.gitconsensus.com/).
+Open the folder in your terminal and run your package manager to install install the required packages and TypeScript declaration files:
 
-* Any code that gets merged into master will automatically be uploaded to the Screeps main world under the user [Quorum](https://screeps.com/a/#!/profile/Quorum). Code is also deployed automatically once a day.
+```bash
+# npm
+npm install
 
-* If the [Quorum](https://screeps.com/a/#!/profile/Quorum) user is no longer spawned in the game it will be relaunched using the [ScreepsAutoSpawner](https://github.com/tedivm/ScreepsAutoSpawner). The AutoSpawner fork used by this project has its own [conensus rules](https://github.com/ScreepsQuorum/ScreepsAutoSpawner/blob/master/.gitconsensus.yaml) and is also automatically kept up to date.
+# yarn
+yarn
+```
 
-* All of the Quorum data is public using [ScreepsDashboard](https://github.com/tedivm/ScreepsDashboard) and hosted at [quorum.tedivm.com](http://quorum.tedivm.com/). This includes full console output, all memory and segment data, and wallet history (with more feature being developed as needed).
+Fire up your preferred editor with typescript installed and you are good to go!
 
+### Rollup and code upload
 
-## Resources
+Screeps Typescript Starter uses rollup to compile your typescript and upload it to a screeps server.
 
-Join the discussion on slack at [#quorum](https://screeps.slack.com/messages/quorum/), available on the [Screeps Slack Network](http://chat.screeps.com/).
+Move or copy `screeps.sample.json` to `screeps.json` and edit it, changing the credentials and optionally adding or removing some of the destinations.
 
-View the [Quorum Dashboard](http://quorum.tedivm.com/) for all the information on the currently running instance.
+Running `rollup -c` will compile your code and do a "dry run", preparing the code for upload but not actually pushing it. Running `rollup -c --environment DEST:main` will compile your code, and then upload it to a screeps server using the `main` config from `screeps.json`.
 
+You can use `-cw` instead of `-c` to automatically re-run when your source code changes - for example, `rollup -cw --environment DEST:main` will automatically upload your code to the `main` configuration every time your code is changed.
+
+Finally, there are also NPM scripts that serve as aliases for these commands in `package.json` for IDE integration. Running `npm run push-main` is equivalent to `rollup -c --environment DEST:main`, and `npm run watch-sim` is equivalent to `rollup -cw --dest sim`.
+
+#### Important! To upload code to a private server, you must have [screepsmod-auth](https://github.com/ScreepsMods/screepsmod-auth) installed and configured!
+
+## Typings
+
+The type definitions for Screeps come from [typed-screeps](https://github.com/screepers/typed-screeps). If you find a problem or have a suggestion, please open an issue there.
+
+## Documentation
+
+We've also spent some time reworking the documentation from the ground-up, which is now generated through [Gitbooks](https://www.gitbook.com/). Includes all the essentials to get you up and running with Screeps AI development in TypeScript, as well as various other tips and tricks to further improve your development workflow.
+
+Maintaining the docs will also become a more community-focused effort, which means you too, can take part in improving the docs for this starter kit.
+
+To visit the docs, [click here](https://screepers.gitbooks.io/screeps-typescript-starter/).
 
 ## Contributing
 
-This project does everything but code itself- that part comes from community pull requests.
-
-The [developer wiki](https://github.com/ScreepsQuorum/screeps-quorum/wiki) should be the first stop before diving into the code. Like the project itself this is completely community run, and documentation contributions are always appreciated.
-
-Not sure where to get started? The github project has a [list of needed features](https://github.com/ScreepsQuorum/screeps-quorum/issues) specifically to give people a jumping off point for getting into the project.
-
-Please take a moment to read the [contributors guide](https://github.com/ScreepsQuorum/screeps-quorum/blob/master/CONTRIBUTING.md) to get an understanding of how the project works and how contributions will be looked at by the community.
-
-
-## Deploying
-
-This codebase uses [Gulp](https://gulpjs.com/) to deploy to the screeps server. It uses a configuration file, `.screeps.json`, which can save multiple configurations.
-
-```json
-{
-  "main" : {
-    "username": "Quorum",
-    "password": "random123",
-    "branch": "main"
-  },
-  "127.0.0.1" : {
-    "username": "Quorum",
-    "password": "random123"
-  },
-  "myserver.example.com" : {
-    "username": "Quorum",
-    "password": "random123",
-    "ssl": true
-  }
-}
-```
-
-By default `Gulp` will deploy to the `main` server, but this can be changed with the `server` flag.
-
-```
-gulp --server=127.0.0.1
-```
-
-By default gulp will push to the `default` branch. This can be changed in the configuration file or by passing the `branch` option to gulp.
+Issues, Pull Requests, and contribution to the docs are welcome! See our [Contributing Guidelines](CONTRIBUTING.md) for more details.
